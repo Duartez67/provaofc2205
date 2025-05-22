@@ -18,3 +18,12 @@ function readFile(file) {
     });
   });
 }
+function writeFile(file, data) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(file, JSON.stringify(data, null, 2), (err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  }
+  
