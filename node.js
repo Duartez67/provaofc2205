@@ -65,4 +65,22 @@ function writeFile(file, data) {
       
       
           const logEncontrado = [...logs, ...registros].find((item) => item.id === id);
+          if (!logEncontrado) {
+            return response.status(404).json({ error: "ID não encontrado" });
+          }
+      
+      
+          return response.status(200).json(logEncontrado);
+        } catch (error) {
+          console.error("Erro ao buscar log:", error);
+          return response.status(500).json({ error: "Internal Server Error" });
+        }
+      });
+      
+      
+      server.listen(PORT, () => {
+        console.log(` Server is running on http://localhost:${PORT}`);
+      });
+      
+      
       
