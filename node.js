@@ -26,4 +26,18 @@ function writeFile(file, data) {
       });
     });
   }
+  server.post("/logs/registros", async (request, response) => {
+    const { name } = request.body;
+  
+  
+    if (!name) {
+      return response.status(400).json({ error: "Nome é obrigatório" });
+    }
+  
+  
+    const user = {
+      id: randomUUID(),
+      dateRequested: new Date().toISOString(),
+      name,
+    };
   
