@@ -55,4 +55,14 @@ function writeFile(file, data) {
         return response.status(500).json({ error: "Internal Server Error" });
       }
     });
-    
+    server.get("/logs/:id", async (request, response) => {
+        const { id } = request.params;
+      
+      
+        try {
+          const logs = await readFile("logs.txt");
+          const registros = await readFile("registros.txt");
+      
+      
+          const logEncontrado = [...logs, ...registros].find((item) => item.id === id);
+      
