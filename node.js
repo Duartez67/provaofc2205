@@ -40,4 +40,19 @@ function writeFile(file, data) {
       dateRequested: new Date().toISOString(),
       name,
     };
-  
+    try {
+        const logs = await readFile("registros.txt");
+        logs.push(user);
+        await writeFile("registros.txt", logs);
+    
+    
+        return response.status(201).json({
+          message: "Registro criado com sucesso",
+          user,
+        });
+      } catch (error) {
+        console.error("Erro ao processar registro:", error);
+        return response.status(500).json({ error: "Internal Server Error" });
+      }
+    });
+    
